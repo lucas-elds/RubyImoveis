@@ -1,0 +1,27 @@
+<h1>Imóveis Disponíveis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Endereço</th>
+      <th>Preço</th>
+      <th>Descrição</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @imoveis.each do |imovel| %>
+      <tr>
+        <td><%= imovel.endereco %></td>
+        <td><%= number_to_currency(imovel.preco) %></td>
+        <td><%= imovel.descricao %></td>
+        <td>
+          <% if current_cliente %>
+            <%= link_to "Solicitar Venda", new_solicitacao_path(imovel_id: imovel.id), class: "btn btn-primary" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,22 @@
+<h1>Nova Solicitação</h1>
+
+<%= form_with model: @solicitacao do |f| %>
+  <%= f.hidden_field :imovel_id %>
+
+  <div>
+    <%= f.label :data_interesse, "Data da visita" %>
+    <%= f.date_field :data_interesse %>
+  </div>
+
+  <div>
+    <%= f.label :preco_proposto, "Preço proposto" %>
+    <%= f.number_field :preco_proposto, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= f.label :mensagem, "Mensagem" %>
+    <%= f.text_area :mensagem %>
+  </div>
+
+  <%= f.submit "Enviar Solicitação" %>
+<% end %>

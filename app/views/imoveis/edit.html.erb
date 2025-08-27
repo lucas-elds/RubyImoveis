@@ -1,0 +1,12 @@
+<% content_for :title, "Editing imovel" %>
+
+<h1>Editing imovel</h1>
+
+<%= render "form", imovel: @imovel %>
+
+<br>
+
+<div>
+  <%= link_to "Show this imovel", @imovel %> |
+  <%= link_to "Back to imoveis", imoveis_path %>
+</div>

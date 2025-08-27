@@ -17,6 +17,15 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# Para autenticação de usuários
+gem "devise"
+
+# Para controle de permissões (autorização)
+gem "cancancan"
+
+# Para paginação
+gem "kaminari"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
@@ -49,6 +58,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Adicione rspec-rails dentro do grupo de desenvolvimento e teste
+  gem "rspec-rails", "~> 6.0"
 end
 
 group :development do

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @imovel %>
+
+<div>
+  <%= link_to "Edit this imovel", edit_imovel_path(@imovel) %> |
+  <%= link_to "Back to imoveis", imoveis_path %>
+
+  <%= button_to "Destroy this imovel", @imovel, method: :delete %>
+</div>

@@ -14,3 +14,11 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym "RESTful"
 # end
+
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  # Correções de pluralização para português
+  inflect.irregular 'corretor', 'corretores'
+  inflect.irregular 'cliente', 'clientes'
+  inflect.irregular 'imovel', 'imoveis'
+  inflect.irregular 'solicitacao', 'solicitacoes'
+end

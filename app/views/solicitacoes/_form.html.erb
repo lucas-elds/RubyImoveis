@@ -1,0 +1,37 @@
+<%= form_with(model: solicitacao) do |form| %>
+  <% if solicitacao.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(solicitacao.errors.count, "error") %> prohibited this solicitacao from being saved:</h2>
+
+      <ul>
+        <% solicitacao.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :mensagem, style: "display: block" %>
+    <%= form.text_field :mensagem %>
+  </div>
+
+  <div>
+    <%= form.label :data_visita_proposta, style: "display: block" %>
+    <%= form.date_field :data_visita_proposta %>
+  </div>
+
+  <div>
+    <%= form.label :preco_proposto, style: "display: block" %>
+    <%= form.text_field :preco_proposto %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

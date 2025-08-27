@@ -1,9 +1,9 @@
-class CorretorsController < ApplicationController
+class CorretoresController < ApplicationController
   before_action :set_corretor, only: %i[ show edit update destroy ]
 
   # GET /corretors or /corretors.json
   def index
-    @corretors = Corretor.all
+    @corretores = Corretor.all
   end
 
   # GET /corretors/1 or /corretors/1.json
@@ -52,7 +52,7 @@ class CorretorsController < ApplicationController
     @corretor.destroy!
 
     respond_to do |format|
-      format.html { redirect_to corretors_path, notice: "Corretor was successfully destroyed.", status: :see_other }
+      format.html { redirect_to corretores_path, notice: "Corretor was successfully destroyed.", status: :see_other }
       format.json { head :no_content }
     end
   end
