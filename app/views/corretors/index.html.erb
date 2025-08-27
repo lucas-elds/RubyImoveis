@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Corretors" %>
+
+<h1>Corretors</h1>
+
+<div id="corretors">
+  <% @corretors.each do |corretor| %>
+    <%= render corretor %>
+    <p>
+      <%= link_to "Show this corretor", corretor %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New corretor", new_corretor_path %>
