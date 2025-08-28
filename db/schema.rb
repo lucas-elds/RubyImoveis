@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_27_135104) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_27_150724) do
   create_table "clientes", force: :cascade do |t|
     t.string "nome"
     t.string "cpf"
@@ -58,6 +58,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_135104) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status", default: "disponível", null: false
+    t.string "tipo", null: false
     t.index ["corretor_id"], name: "index_imoveis_on_corretor_id"
   end
 
@@ -65,7 +66,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_135104) do
     t.string "mensagem"
     t.date "data_visita_proposta"
     t.decimal "preco_proposto"
-    t.string "status"
+    t.string "status", default: "Em Aberto", null: false
     t.integer "imovel_id", null: false
     t.integer "cliente_id", null: false
     t.datetime "created_at", null: false

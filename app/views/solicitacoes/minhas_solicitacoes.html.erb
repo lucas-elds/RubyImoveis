@@ -1,0 +1,18 @@
+<h1>Minhas Solicitações</h1>
+
+<div class="cards-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
+  <% @solicitacoes.each do |solicitacao| %>
+    <div class="card" style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; width: 300px;">
+      <h3>Imóvel: <%= solicitacao.imovel.tipo %> em <%= solicitacao.imovel.cidade %></h3>
+      <p><strong>Bairro:</strong> <%= solicitacao.imovel.bairro %></p>
+      <p><strong>Data da Visita:</strong> <%= solicitacao.data_visita_proposta %></p>
+      <p><strong>Preço Proposto:</strong> <%= number_to_currency(solicitacao.preco_proposto) %></p>
+      <p><strong>Status:</strong> <%= solicitacao.status %></p>
+
+      <div style="margin-top: 8px; display: flex; gap: 8px;">
+        <%= link_to "Editar", edit_solicitacao_path(solicitacao), class: "btn btn-primary" %>
+        <%= button_to "Excluir", solicitacao_path(solicitacao), method: :delete, data: { confirm: "Tem certeza?" }, class: "btn btn-danger" %>
+      </div>
+    </div>
+  <% end %>
+</div>

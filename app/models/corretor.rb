@@ -5,6 +5,7 @@ class Corretor < ApplicationRecord
 
   # Relacionamentos
   has_many :imoveis, dependent: :destroy
+  has_many :solicitacoes, through: :imoveis
 
   # Validações
   validates :nome, presence: true

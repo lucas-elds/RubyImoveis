@@ -1,9 +1,23 @@
 class ClientesController < ApplicationController
-  before_action :set_cliente, only: %i[ show edit update destroy ]
+  before_action :authenticate_cliente!
+  before_action :set_cliente, only: [:perfil, :edit, :update, :destroy]
 
   # GET /clientes or /clientes.json
   def index
     @clientes = Cliente.all
+  end
+
+  def perfil
+    # @cliente já é setado pelo before_action
+  end
+
+  def update
+    if @cliente.update(cliente_params)
+      sign_in(@cliente, bypass: true)
+      redirect_to imoveis_path, notice: "Perfil atualizado com sucesso."
+    else
+      render :edit
+    end
   end
 
   # GET /clientes/1 or /clientes/1.json
@@ -17,6 +31,10 @@ class ClientesController < ApplicationController
 
   # GET /clientes/1/edit
   def edit
+  end
+
+  def perfil
+    @cliente = current_cliente
   end
 
   # POST /clientes or /clientes.json
@@ -36,35 +54,25 @@ class ClientesController < ApplicationController
 
   # PATCH/PUT /clientes/1 or /clientes/1.json
   def update
-    respond_to do |format|
-      if @cliente.update(cliente_params)
-        format.html { redirect_to @cliente, notice: "Cliente was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @cliente }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @cliente.errors, status: :unprocessable_entity }
-      end
+    if @cliente.update_without_password(cliente_params)
+      redirect_to imoveis_path, notice: "Perfil atualizado com sucesso."
+    else
+      render :edit
     end
   end
 
   # DELETE /clientes/1 or /clientes/1.json
   def destroy
-    @cliente.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to clientes_path, notice: "Cliente was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
-    end
+    @cliente.destroy
+    redirect_to root_path, notice: "Conta excluída com sucesso."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_cliente
-      @cliente = Cliente.find(params.expect(:id))
+      @cliente = current_cliente
     end
 
-    # Only allow a list of trusted parameters through.
     def cliente_params
-      params.expect(cliente: [ :nome, :cpf, :endereco, :telefone ])
+      params.require(:cliente).permit(:nome, :cpf, :endereco, :telefone, :email, :password, :password_confirmation)
     end
-end
+  end

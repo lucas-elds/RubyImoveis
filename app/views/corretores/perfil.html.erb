@@ -1,0 +1,18 @@
+<h1>Meu Perfil</h1>
+
+<ul class="perfil-lista">
+  <li><strong>CRECI:</strong> <%= @corretor.creci %></li>
+  <li><strong>Nome:</strong> <%= @corretor.nome %></li>
+  <li><strong>CPF:</strong> <%= @corretor.cpf %></li>
+  <li><strong>Endereço:</strong> <%= @corretor.endereco %></li>
+  <li><strong>Telefone:</strong> <%= @corretor.telefone %></li>
+  <li><strong>Email:</strong> <%= @corretor.email %></li>
+</ul>
+
+<div style="margin-top: 16px;">
+  <%= link_to "Editar Perfil", edit_corretor_path(current_corretor), class: "btn btn-primary" %>
+
+  <%= button_to "Excluir Conta", corretor_path(current_corretor), method: :delete, data: { confirm: "Tem certeza que deseja excluir sua conta?" }, class: "btn btn-danger" %>
+
+  <%= button_to "Sair", destroy_corretor_session_path, method: :delete, data: { confirm: "Tem certeza que deseja sair?" }, class: "btn btn-secondary" %>
+</div>

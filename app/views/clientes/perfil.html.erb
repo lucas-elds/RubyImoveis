@@ -1,0 +1,21 @@
+<h1>Meu Perfil</h1>
+
+<ul class="perfil-lista">
+  <li><strong>Nome:</strong> <%= @cliente.nome %></li>
+  <li><strong>CPF:</strong> <%= @cliente.cpf %></li>
+  <li><strong>Endereço:</strong> <%= @cliente.endereco %></li>
+  <li><strong>Telefone:</strong> <%= @cliente.telefone %></li>
+  <li><strong>Email:</strong> <%= @cliente.email %></li>
+</ul>
+
+<div style="margin-top: 16px;">
+  <%= link_to "Editar Perfil", edit_cliente_path(current_cliente), class: "btn btn-primary" %>
+
+  <%= button_to "Excluir Conta", cliente_path(@cliente), method: :delete, 
+        data: { confirm: "Tem certeza que deseja excluir sua conta?" }, 
+        class: "btn btn-danger" %>
+
+  <%= button_to "Sair", destroy_cliente_session_path, method: :delete, 
+        data: { confirm: "Tem certeza que deseja sair?" }, 
+        class: "btn btn-secondary" %>
+</div>

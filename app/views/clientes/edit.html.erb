@@ -1,12 +1,6 @@
-<% content_for :title, "Editing cliente" %>
-
-<h1>Editing cliente</h1>
+<h1>Editar Perfil</h1>
 
 <%= render "form", cliente: @cliente %>
 
 <br>
-
-<div>
-  <%= link_to "Show this cliente", @cliente %> |
-  <%= link_to "Back to clientes", clientes_path %>
-</div>
+<%= link_to "Voltar para Perfil", perfil_cliente_path, class: "btn btn-link" %>

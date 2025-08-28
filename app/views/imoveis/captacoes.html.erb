@@ -1,0 +1,32 @@
+<h1>Meus Imóveis</h1>
+
+<div class="cards-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
+  <% @captacoes.each do |captacao| %>
+    <div class="card" style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; width: 300px;">
+      <h3>
+        <%= captacao.tipo %> com
+        <%= captacao.n_quartos %>
+        <%= captacao.n_quartos > 1 ? "quartos" : "quarto" %> 
+        em <%= captacao.cidade %>
+      </h3>
+      <p><strong>Bairro:</strong> <%= captacao.bairro %></p>
+      <p><strong>Cidade:</strong> <%= captacao.cidade %> - <%= captacao.uf %></p>
+      <p><strong>Preço:</strong> <%= number_to_currency(captacao.preco) %></p>
+      <p><strong>Tamanho:</strong> <%= captacao.tamanho %> m²</p>
+      <p><strong>Quartos:</strong> <%= captacao.n_quartos %> | 
+         <strong>Banheiros:</strong> <%= captacao.n_banheiros %></p>
+      <p><strong>Status:</strong> <%= captacao.status %></p>
+
+      <div style="margin-top: 8px; display: flex; gap: 8px;">
+        <!-- Botão de Editar -->
+        <%= link_to "Editar", edit_imovel_path(captacao), class: "btn btn-warning" %>
+
+        <!-- Botão de Excluir -->
+        <%= button_to "Excluir", imovel_path(captacao), 
+                    method: :delete, 
+                    data: { confirm: "Tem certeza que deseja excluir este imóvel?" }, 
+                    class: "btn btn-danger" %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -1,14 +1,21 @@
 class ImoveisController < ApplicationController
-  before_action :set_imovel, only: %i[ show edit update destroy ]
-  before_action :authenticate_corretor!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_corretor!, except: [:index, :show]
+  before_action :set_imovel, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_corretor!, only: [:edit, :update, :destroy]
 
   # GET /imovels or /imovels.json
   def index
-    if current_corretor
-      @imoveis = current_corretor.imoveis
+    if cliente_signed_in?
+      # Exclui imóveis já solicitados pelo cliente
+      solicitados_ids = current_cliente.solicitacoes.pluck(:imovel_id)
+      @imoveis = Imovel.where(status: "disponível").where.not(id: solicitados_ids)
     else
       @imoveis = Imovel.where(status: "disponível")
     end
+  end
+
+  def captacoes
+    @captacoes = current_corretor.imoveis
   end
 
   # GET /imovels/1 or /imovels/1.json
@@ -26,11 +33,11 @@ class ImoveisController < ApplicationController
 
   # POST /imovels or /imovels.json
   def create
-    @imovel = Imovel.new(imovel_params)
+    @imovel = current_corretor.imoveis.build(imovel_params)
 
     respond_to do |format|
       if @imovel.save
-        format.html { redirect_to @imovel, notice: "Imovel was successfully created." }
+        format.html { redirect_to meus_imoveis_path, notice: "Imóvel criado com sucesso." }
         format.json { render :show, status: :created, location: @imovel }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +50,7 @@ class ImoveisController < ApplicationController
   def update
     respond_to do |format|
       if @imovel.update(imovel_params)
-        format.html { redirect_to @imovel, notice: "Imovel was successfully updated.", status: :see_other }
+        format.html { redirect_to meus_imoveis_path, notice: "Imóvel atualizado com sucesso.", status: :see_other }
         format.json { render :show, status: :ok, location: @imovel }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,7 +64,7 @@ class ImoveisController < ApplicationController
     @imovel.destroy!
 
     respond_to do |format|
-      format.html { redirect_to imoveis_path, notice: "Imovel was successfully destroyed.", status: :see_other }
+      format.html { redirect_to meus_imoveis_path, notice: "Imóvel excluído com sucesso.", status: :see_other }
       format.json { head :no_content }
     end
   end
@@ -65,11 +72,17 @@ class ImoveisController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_imovel
-      @imovel = Imovel.find(params.expect(:id))
+      @imovel = Imovel.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def imovel_params
-      params.expect(imovel: [ :preco, :tamanho, :n_quartos, :n_banheiros, :rua, :numero, :cidade, :bairro, :uf, :corretor_id ])
+      params.expect(imovel: [ :preco, :tamanho, :n_quartos, :n_banheiros, :rua, :numero, :cidade, :bairro, :uf, :tipo])
+    end
+
+    def authorize_corretor!
+      unless @imovel.corretor == current_corretor
+        redirect_to imoveis_path, alert: "Você não tem permissão para alterar este imóvel."
+      end
     end
 end

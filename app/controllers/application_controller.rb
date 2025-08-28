@@ -7,4 +7,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nome, :cpf, :creci, :telefone])
     devise_parameter_sanitizer.permit(:account_update, keys: [:nome, :cpf, :creci, :telefone])
   end
+
+  def after_sign_in_path_for(resource)
+    imoveis_path
+  end
 end

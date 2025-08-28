@@ -12,22 +12,27 @@
   <% end %>
 
   <div>
-    <%= form.label :preco, style: "display: block" %>
+    <%= form.label :tipo, "Tipo de imóvel", style: "display: block" %>
+    <%= form.select :tipo, options_for_select(Imovel::TIPO_IMOVEIS, @imovel.tipo), prompt: "Selecione o tipo do imóvel" %>
+  </div>
+
+  <div>
+    <%= form.label :preco, "Preço", style: "display: block" %>
     <%= form.text_field :preco %>
   </div>
 
   <div>
-    <%= form.label :tamanho, style: "display: block" %>
+    <%= form.label :tamanho, "Tamanho", style: "display: block" %>
     <%= form.text_field :tamanho %>
   </div>
 
   <div>
-    <%= form.label :n_quartos, style: "display: block" %>
+    <%= form.label :n_quartos, "Quartos", style: "display: block" %>
     <%= form.number_field :n_quartos %>
   </div>
 
   <div>
-    <%= form.label :n_banheiros, style: "display: block" %>
+    <%= form.label :n_banheiros, "Banheiros", style: "display: block" %>
     <%= form.number_field :n_banheiros %>
   </div>
 
@@ -37,7 +42,7 @@
   </div>
 
   <div>
-    <%= form.label :numero, style: "display: block" %>
+    <%= form.label :numero, "Número", style: "display: block" %>
     <%= form.text_field :numero %>
   </div>
 
@@ -52,13 +57,8 @@
   </div>
 
   <div>
-    <%= form.label :uf, style: "display: block" %>
+    <%= form.label :uf, "Estado", style: "display: block" %>
     <%= form.text_field :uf %>
-  </div>
-
-  <div>
-    <%= form.label :corretor_id, style: "display: block" %>
-    <%= form.text_field :corretor_id %>
   </div>
 
   <div>

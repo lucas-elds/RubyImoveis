@@ -1,27 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
 <h1>Imóveis Disponíveis</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Endereço</th>
-      <th>Preço</th>
-      <th>Descrição</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
+<div class="cards-container" style="display: flex; flex-wrap: wrap; gap: 20px;">
+  <% @imoveis.each do |imovel| %>
+    <div class="card" style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; width: 300px;">
+      <h3>
+        <%= imovel.tipo %> com
+        <%= imovel.n_quartos %> 
+        <%= imovel.n_quartos > 1 ? "quartos" : "quarto" %> 
+        em <%= imovel.cidade %>
+      </h3>
+      <p><strong>Bairro:</strong> <%= imovel.bairro %></p>
+      <p><strong>Cidade:</strong> <%= imovel.cidade %> - <%= imovel.uf %></p>
+      <p><strong>Tipo:</strong> <%= imovel.tipo %></p>
+      <p><strong>Preço:</strong> <%= number_to_currency(imovel.preco) %></p>
+      <p><strong>Tamanho:</strong> <%= imovel.tamanho %> m²</p>
+      <p><strong>Quartos:</strong> <%= imovel.n_quartos %> | 
+         <strong>Banheiros:</strong> <%= imovel.n_banheiros %></p>
 
-  <tbody>
-    <% @imoveis.each do |imovel| %>
-      <tr>
-        <td><%= imovel.endereco %></td>
-        <td><%= number_to_currency(imovel.preco) %></td>
-        <td><%= imovel.descricao %></td>
-        <td>
-          <% if current_cliente %>
-            <%= link_to "Solicitar Venda", new_solicitacao_path(imovel_id: imovel.id), class: "btn btn-primary" %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% if cliente_signed_in? %>
+        <%= link_to "Solicitar visita", new_solicitacao_path(imovel_id: imovel.id), class: "btn btn-primary", style: "margin-top: 8px;" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

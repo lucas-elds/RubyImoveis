@@ -1,2 +1,18 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1>RubyImóveis</h1>
+<p>Seu marketplace de imóveis em João Pessoa e região</p>
+
+<% unless corretor_signed_in? || cliente_signed_in? %>
+  <div>
+    <p>
+      É um corretor de imóveis? 
+      <%= link_to "Cadastre-se aqui", new_corretor_registration_path %> ou 
+      <%= link_to "Faça login", new_corretor_session_path %>
+    </p>
+
+    <p>
+      Quer comprar um imóvel? 
+      <%= link_to "Cadastre-se aqui", new_cliente_registration_path %> ou 
+      <%= link_to "Faça login", new_cliente_session_path %>
+    </p>
+  </div>
+<% end %>

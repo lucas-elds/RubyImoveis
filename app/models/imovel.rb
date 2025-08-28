@@ -3,11 +3,12 @@ class Imovel < ApplicationRecord
   has_many :solicitacoes, dependent: :destroy
   has_many :clientes, through: :solicitacoes
 
-  STATUSES = ["disponível", "vendido"]
-
-  validates :status, inclusion: { in: STATUSES }
-
   # Validações
+  STATUSES = ["disponível", "vendido"]
+  validates :status, inclusion: { in: STATUSES }
+  TIPO_IMOVEIS = ["Apartamento", "Casa"]
+  validates :tipo, presence: true, inclusion: { in: TIPO_IMOVEIS }
+
   validates :preco, presence: true, numericality: { greater_than: 0 }
   validates :tamanho, presence: true
   validates :n_quartos, :n_banheiros, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
