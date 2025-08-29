@@ -15,7 +15,7 @@
           <%= button_to "Aceitar", aceitar_solicitacao_path(solicitacao), method: :patch, class: "btn btn-success" %>
           <%= button_to "Rejeitar", rejeitar_solicitacao_path(solicitacao), method: :patch, class: "btn btn-danger" %>
         <% elsif solicitacao.status == "Aceita" %>
-          <%= button_to "Concluir", concluir_solicitacao_path(solicitacao), method: :patch, class: "btn btn-primary" %>
+          <%= button_to "Confirmar venda", concluir_solicitacao_path(solicitacao), method: :patch, class: "btn btn-primary" %>
         <% elsif ["Rejeitada", "Concluída"].include?(solicitacao.status) %>
           <%= button_to "Excluir", solicitacao_path(solicitacao), method: :delete, data: { confirm: "Tem certeza que deseja excluir?" }, class: "btn btn-danger" %>
         <% end %>

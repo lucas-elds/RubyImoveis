@@ -5,6 +5,7 @@ class Cliente < ApplicationRecord
 
   # Relacionamentos
   has_many :solicitacoes, dependent: :destroy
+  has_many :vendas, dependent: :destroy
   has_many :imoveis, through: :solicitacoes
 
   # Validações

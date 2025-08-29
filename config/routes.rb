@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :imoveis
 
+  get 'clientes/meus_imoveis', to: 'vendas#meus_imoveis', as: :meus_imoveis_cliente
+  get 'corretores/minhas_vendas', to: 'vendas#minhas_vendas', as: :minhas_vendas
   get 'corretores/solicitacoes', to: 'solicitacoes#em_andamento', as: :solicitacoes_em_andamento
   get 'corretores/captacoes', to: "imoveis#captacoes", as: :meus_imoveis
   get 'clientes/perfil', to: 'clientes#perfil', as: :perfil_cliente

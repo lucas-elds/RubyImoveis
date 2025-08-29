@@ -1,0 +1,22 @@
+<h1>Meus Imóveis</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Imóvel</th>
+      <th>Corretor</th>
+      <th>Preço</th>
+      <th>Data da Compra</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @vendas.each do |venda| %>
+      <tr>
+        <td><%= venda.imovel.tipo %> em <%= venda.imovel.cidade %></td>
+        <td><%= venda.corretor.nome %></td>
+        <td><%= venda.cliente.nome %></td>
+        <td><%= number_to_currency(venda.valor) %></td>
+        <td><%= venda.created_at.strftime("%d/%m/%Y") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -63,10 +63,32 @@ class SolicitacoesController < ApplicationController
   end
 
   def concluir
+    @solicitacao = Solicitacao.find(params[:id])
     authorize! :update, @solicitacao
-    @solicitacao.update(status: "Concluída")
-    redirect_to solicitacoes_em_andamento_path, notice: "Solicitação concluída."
+
+    ActiveRecord::Base.transaction do
+      # 1. Atualizar status da solicitação
+      @solicitacao.update!(status: "Concluída")
+
+      # 2. Atualizar status do imóvel
+      imovel = @solicitacao.imovel
+      imovel.update!(status: "vendido")
+
+      # 3. Criar a venda
+      Venda.create!(
+        cliente: @solicitacao.cliente,
+        corretor: imovel.corretor,
+        imovel: imovel,
+        valor: @solicitacao.preco_proposto,
+        data: Date.today
+      )
+    end
+
+    redirect_to solicitacoes_em_andamento_path, notice: "Venda concluída com sucesso!"
+  rescue => e
+    redirect_to solicitacoes_em_andamento_path, alert: "Erro ao concluir venda: #{e.message}"
   end
+
 
   # Cliente e corretor: deletar
   # def destroy_cliente
