@@ -11,6 +11,6 @@ class Corretor < ApplicationRecord
   # Validações
   validates :nome, presence: true
   validates :cpf, presence: true, uniqueness: true
-  validates :creci, presence: true, uniqueness: true
+  validates :creci, presence: true, uniqueness: { case_sensitive: false }
   validates :telefone, presence: true
 end

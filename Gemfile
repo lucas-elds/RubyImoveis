@@ -61,6 +61,12 @@ group :development, :test do
 
   # Adicione rspec-rails dentro do grupo de desenvolvimento e teste
   gem "rspec-rails", "~> 6.0"
+
+  # Factories para testes
+  gem "factory_bot_rails"
+
+  # Matchers para validações e associações
+  gem "shoulda-matchers"
 end
 
 group :development do
@@ -72,4 +78,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
+
+  # Cobertura de testes
+  gem "simplecov", require: false
+
+  # Limpeza do banco em testes com JS
+  gem "database_cleaner-active_record"
 end
