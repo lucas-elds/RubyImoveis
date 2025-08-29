@@ -60,7 +60,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   # Adicione rspec-rails dentro do grupo de desenvolvimento e teste
-  gem "rspec-rails", "~> 6.0"
+  gem "rspec-rails", "~> 8.0"
 
   # Factories para testes
   gem "factory_bot_rails"
