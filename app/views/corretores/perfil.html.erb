@@ -1,3 +1,5 @@
+<div id="perfil">
+<i class="fa-solid fa-user"></i>
 <h1>Meu Perfil</h1>
 
 <ul class="perfil-lista">
@@ -15,4 +17,5 @@
   <%= button_to "Excluir Conta", corretor_path(current_corretor), method: :delete, data: { confirm: "Tem certeza que deseja excluir sua conta?" }, class: "btn btn-danger" %>
 
   <%= button_to "Sair", destroy_corretor_session_path, method: :delete, data: { confirm: "Tem certeza que deseja sair?" }, class: "btn btn-secondary" %>
+</div>
 </div>

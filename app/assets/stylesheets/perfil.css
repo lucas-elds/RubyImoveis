@@ -1,0 +1,48 @@
+#perfil {
+    background-color: #ffffff;
+    width: 350px;
+    padding: 50px 25px;
+    border-radius: 15px;
+}
+
+#perfil ul {
+    list-style-type: none;
+    width: 350px;
+    text-align: left;
+}
+
+#perfil .btn-primary {
+    padding: 5px 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+}
+
+#perfil div .button_to {
+    width: 350px;
+    margin: 10px 0;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 5px;
+}
+
+#perfil div .button_to button {
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #a31c2b;
+    color: #ffffff;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#perfil i {
+    font-size: 50px;
+    color: #a31c2b;
+    margin-bottom: 5px;
+}
+
+.perfil-lista {
+    margin: 25px 0;
+    padding: 0px 25px;
+}
