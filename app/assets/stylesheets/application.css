@@ -95,8 +95,14 @@ h2 {
 
 .field {
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;
+    margin: 10px 0;
     width: 350px;
+}
+
+.field br {
+    display: none;
 }
 
 .field label {
@@ -109,8 +115,8 @@ h2 {
 }
 
 #corretor_remember_me {
-    width: auto;
-    margin-right: 10px;
+    width: 250px;
+    margin-bottom: -15px;
 }
 
 body a {
@@ -119,3 +125,4 @@ body a {
     font-weight: bold;
     transition: 0.5s;
 }
+
