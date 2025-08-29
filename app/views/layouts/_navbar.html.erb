@@ -4,29 +4,40 @@
         current_page?(new_corretor_session_path) || 
         current_page?(new_cliente_registration_path) || 
         current_page?(new_cliente_session_path) %>
-    <nav style="position: fixed; top: 0; right: 0; left: 0; background-color: #343a40; color: white; padding: 12px 20px; z-index: 1000; display: flex; justify-content: space-between; align-items: center;">
+  <nav style="position: fixed; top: 0; right: 0; left: 0; background-color: #343a40; color: white; padding: 12px 20px; z-index: 1000; display: flex; justify-content: space-between; align-items: center;">
     <div class="nav-left">
-        <%= link_to "Início", imoveis_path, style: "color: white; margin-right: 20px;" %>
+      <%= link_to "Início", imoveis_path, style: "color: white; margin-right: 20px;" %>
     </div>
-
+    
     <div class="nav-right">
-        <% if corretor_signed_in? %>
-            <%= link_to "Novo Imóvel", new_imovel_path, style: "color: white; margin-right: 20px;" %>
-            <%= link_to "Minhas captações", meus_imoveis_path, style: "color: white; margin-right: 20px;" %>
-            <%= link_to "Minhas solicitações", solicitacoes_em_andamento_path, style: "color: white; margin-right: 20px;" %>
-            <%= link_to "Perfil", perfil_corretor_path, style: "color: white; margin-right: 15px;" %>
-        <% end %>
-        <% if cliente_signed_in? %>
-            <%= link_to "Minhas solicitações", minhas_solicitacoes_path, style: "color: white; margin-right: 15px;" %>
-            <%= link_to "Perfil", perfil_cliente_path, style: "color: white; margin-right: 15px;" %>
-        <% end %>
-    </div>
-    </nav>
+      <% if can?(:create, Imovel) %>
+        <%= link_to "Novo Imóvel", new_imovel_path, style: "color: white; margin-right: 20px;" %>
+      <% end %>
 
-    <!-- Para evitar que o conteúdo fique atrás do navbar fixo, adicione padding-top no body -->
-    <style>
+      <% if can?(:read, Imovel) && current_corretor %>
+        <%= link_to "Minhas captações", meus_imoveis_path, style: "color: white; margin-right: 20px;" %>
+      <% end %>
+
+      <% if can?(:read, Solicitacao) && current_corretor %>
+        <%= link_to "Minhas solicitações", solicitacoes_em_andamento_path, style: "color: white; margin-right: 20px;" %>
+      <% end %>
+
+      <% if can?(:read, Cliente) && current_cliente %>
+        <%= link_to "Minhas solicitações", minhas_solicitacoes_path, style: "color: white; margin-right: 15px;" %>
+      <% end %>
+
+      <% if can?(:read, Corretor) && current_corretor %>
+        <%= link_to "Perfil", perfil_corretor_path, style: "color: white; margin-right: 15px;" %>
+      <% elsif can?(:read, Cliente) && current_cliente %>
+        <%= link_to "Perfil", perfil_cliente_path, style: "color: white; margin-right: 15px;" %>
+      <% end %>
+    </div>
+  </nav>
+
+  <!-- Para evitar que o conteúdo fique atrás do navbar fixo, adicione padding-top no body -->
+  <style>
     body {
-        padding-top: 60px; /* ajuste de acordo com a altura do navbar */
+      padding-top: 60px; /* ajuste de acordo com a altura do navbar */
     }
-    </style>
+  </style>
 <% end %>
