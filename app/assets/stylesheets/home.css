@@ -1,0 +1,59 @@
+#tela-home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background-color: #f6f3ec;
+    font-family: Arial, sans-serif;
+}
+
+#logo-home {
+    width: 250px;
+    height: auto;
+    /* border: 3px solid #a31c2b;
+    border-radius: 300px; */
+}
+
+#tela-home h1 {
+    margin: 15px 0;
+    font-size: 20px;
+    /* color: #a31c2b; */
+    color: #000000;
+}
+
+#tela-home .link {
+    color: #a31c2b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.5s;
+}
+
+#tela-home .link:hover {
+    color: #d8253a;
+}
+
+#login-imoveis-corretor {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#login-imoveis-corretor p {
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 5px;
+}
+
+.icone-login {
+    color: #a31c2b;
+    font-size: 50px;
+}

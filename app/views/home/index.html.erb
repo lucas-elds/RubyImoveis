@@ -1,18 +1,23 @@
-<h1>RubyImóveis</h1>
-<p>Seu marketplace de imóveis em João Pessoa e região</p>
+<%= stylesheet_link_tag "home" %>
+<main id="tela-home">
+  <%= image_tag "logo.png", alt: "Logo do site", id: "logo-home" %>
+  <h1>Seu marketplace de imóveis em João Pessoa e região!</h1>
 
-<% unless corretor_signed_in? || cliente_signed_in? %>
-  <div>
-    <p>
-      É um corretor de imóveis? 
-      <%= link_to "Cadastre-se aqui", new_corretor_registration_path %> ou 
-      <%= link_to "Faça login", new_corretor_session_path %>
-    </p>
+  <% unless corretor_signed_in? || cliente_signed_in? %>
+    <div id="login-imoveis-corretor">
+      <p>
+      <i class="fa-solid fa-briefcase icone-login"></i>
+        É um corretor de imóveis? 
+        <%= link_to "Cadastre-se aqui", new_corretor_registration_path, class: "link" %> ou 
+        <%= link_to "Faça login", new_corretor_session_path, class: "link" %>
+      </p>
 
-    <p>
-      Quer comprar um imóvel? 
-      <%= link_to "Cadastre-se aqui", new_cliente_registration_path %> ou 
-      <%= link_to "Faça login", new_cliente_session_path %>
-    </p>
-  </div>
-<% end %>
+      <p>
+      <i class="fa-solid fa-house icone-login"></i>
+        Quer comprar um imóvel? 
+        <%= link_to "Cadastre-se aqui", new_cliente_registration_path, class: "link" %> ou 
+        <%= link_to "Faça login", new_cliente_session_path, class: "link" %>
+      </p>
+    </div>
+  <% end %>
+</main>
