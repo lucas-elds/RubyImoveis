@@ -27,8 +27,19 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= yield %>
+
+    <div class="toast-container">
+      <% flash.each do |type, message| %>
+        <div 
+          class="toast <%= type %>" 
+          data-controller="alerta"
+        >
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+
+
   </body>
 </html>

@@ -6,18 +6,27 @@
   <% unless corretor_signed_in? || cliente_signed_in? %>
     <div id="login-imoveis-corretor">
       <p>
-      <i class="fa-solid fa-briefcase icone-login"></i>
+        <i class="fa-solid fa-briefcase icone-login"></i>
         É um corretor de imóveis? 
         <%= link_to "Cadastre-se aqui", new_corretor_registration_path, class: "link" %> ou 
         <%= link_to "Faça login", new_corretor_session_path, class: "link" %>
       </p>
 
       <p>
-      <i class="fa-solid fa-house icone-login"></i>
+        <i class="fa-solid fa-house icone-login"></i>
         Quer comprar um imóvel? 
         <%= link_to "Cadastre-se aqui", new_cliente_registration_path, class: "link" %> ou 
         <%= link_to "Faça login", new_cliente_session_path, class: "link" %>
       </p>
     </div>
   <% end %>
+
+  <!-- Flash messages como toasts -->
+  <div data-controller="alerta" class="toast-container">
+    <% flash.each do |tipo, mensagem| %>
+      <div data-alerta-target="toast" class="toast <%= tipo %>">
+        <%= mensagem %>
+      </div>
+    <% end %>
+  </div>
 </main>

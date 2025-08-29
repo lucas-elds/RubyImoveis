@@ -3,14 +3,31 @@ class ImoveisController < ApplicationController
   load_and_authorize_resource except: [:index, :captacoes]  # carregamento automático das ações padrão
 
   # GET /imoveis
+  # def index
+  #   if cliente_signed_in?
+  #     solicitados_ids = current_cliente.solicitacoes.pluck(:imovel_id)
+  #     @imoveis = Imovel.where(status: "disponível").where.not(id: solicitados_ids)
+  #   else
+  #     @imoveis = Imovel.where(status: "disponível")
+  #   end
+  #   authorize! :read, Imovel  # garante que CanCanCan autorize a ação
+  # end
   def index
     if cliente_signed_in?
       solicitados_ids = current_cliente.solicitacoes.pluck(:imovel_id)
-      @imoveis = Imovel.where(status: "disponível").where.not(id: solicitados_ids)
+      @imoveis = Imovel.where(status: "disponível")
+                      .where.not(id: solicitados_ids)
+                      .order(created_at: :desc)  # opcional: ordenar do mais recente
+                      .page(params[:page])
+                      .per(10)  # mostra 10 imóveis por página
     else
       @imoveis = Imovel.where(status: "disponível")
+                      .order(created_at: :desc)
+                      .page(params[:page])
+                      .per(10)
     end
-    authorize! :read, Imovel  # garante que CanCanCan autorize a ação
+
+    authorize! :read, Imovel
   end
 
   # GET /corretores/captacoes

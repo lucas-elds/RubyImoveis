@@ -1,9 +1,8 @@
+// Este arquivo só registra os controllers Stimulus
 import { Application } from "@hotwired/stimulus"
+import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 
 const application = Application.start()
+eagerLoadControllersFrom("controllers", application)
 
-// Configure Stimulus development experience
-application.debug = false
-window.Stimulus   = application
-
-export { application }
+export { application } // Certifique-se de exportar para outros módulos
